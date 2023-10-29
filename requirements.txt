@@ -1,0 +1,9 @@
+langchain==0.0.325
+pdfminer.six
+streamlit
+streamlit-extras
+transformers
+requests
+torch
+sentence_transformers
+chromadb==0.4.14

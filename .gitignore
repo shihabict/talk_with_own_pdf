@@ -1,0 +1,8 @@
+*.env
+.idea/
+.ipynb_checkpoints/
+__pycache__/
+LaMini-Flan-T5-783M/
+db/
+venv/
+pdfs/

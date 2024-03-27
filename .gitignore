@@ -1,5 +1,7 @@
 .env
 .idea
 __pycache__/
+venv/
 pdfenv/*
 data/
+storage/

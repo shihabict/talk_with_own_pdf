@@ -3,3 +3,5 @@ openai
 pypdf
 python-dotenv
 langchain_community
+transformers
+torch

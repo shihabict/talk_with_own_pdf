@@ -18,6 +18,14 @@ class DocSummarizer:
                                 "{document}"
                                 Summary:
                               """
+
+        self.prompt_extended_post = """
+                                    You are an expert who can write larger context document from small document.
+                                    While writing document focus on the provided information and write extensively.
+                                    Do not hallucinate much,
+                                    maintain coherence and context of the writing.
+        
+                                    """
         # Define LLM Chain
 
         self.llm = ChatOllama(
@@ -40,14 +48,19 @@ class DocSummarizer:
     def load_pdf(self,pdf_path):
         if os.path.exists(pdf_path):
             loader = PyPDFLoader(pdf_path)
-            self.docs = loader.load()
-            return self.docs
+            docs = loader.load()
+            return docs
         else:
             print('PDF not exist')
 
     def get_summary(self,pdf_path):
-        self.load_pdf(pdf_path)
-        return self.stuff_chain.invoke(self.docs)
+        docs = self.load_pdf(pdf_path)
+        return self.stuff_chain.invoke(docs)
+
+    def write_extended_document(self,pdf_path):
+        docs = self.load_pdf(pdf_path)
+        # return self.llm_chain.invoke()
+
 
 if __name__ == '__main__':
     ollama_model = 'llama3.2:1b'
@@ -55,4 +68,4 @@ if __name__ == '__main__':
     doc_summarizer = DocSummarizer(ollama_model=ollama_model)
     # doc_summarizer.load_pdf(pdf_path=pdf_path)
     summary = doc_summarizer.get_summary(pdf_path)
-    print(summary)
+    print(summary['output_text'])
